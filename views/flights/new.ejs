@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+<h1>New Flight</h1>
+<section id="new-flight-section">
+    <form action="/flights" method="POST" id="form1">
+        <label>Airline
+            <input type="text" name="airline">
+        </label><br>
+        <label>Flight Number
+            <input type="text" name="flightNo">
+        </label><br>
+        <label>Departure
+            <input type="datetime-local" name="departs">
+        </label>
+        <div>
+            <p>Default Departure Date: <%= destDate %></p>
+        </div>
+        <select name="airport" id="">
+            <option value="AUS">AUS</option>
+            <option value="DAL">DAL</option>
+            <option value="LAX">LAX</option>
+            <option value="SAN">SAN</option>
+        </select>
+        <br>
+        <button type="submit" form="form1" class="btn btn-success" id="submit-new-flight">Add Flight</button>
+    </form>
+</section>
+<%- include('../partials/footer.ejs') %>

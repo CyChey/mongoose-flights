@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs') %>
+<h1>Flight List</h1>
+<table class="table" id="flight-index">
+    <thead>
+        <th scope="col">Airline</th>
+        <th scope="col">Flight Number</th>
+        <th scope="col">Departure Date</th>
+        <th scope="col">Flight Details</th>
+        <th scope="col">Delete Flight</th>
+    </thead>
+    <tbody>
+        <% flights.forEach(function(flight) { 
+                    let todayDate = new Date()
+                    let flightDate = flight.departs
+                    console.log(`todays date: ${todayDate}`)
+                    console.log(`comparison date: ${flightDate}`)
+                    if (todayDate > flightDate) {
+                    
+                %>
+        <tr>
+            <td class="departed"><%= flight.airline %></td>
+            <td class="departed"><%= flight.flightNo %></td>
+            <td class="departed">
+                <%= flight.departs %>
+            </td>
+            <td><a href="/flights/<%= flight._id %>" class="btn btn-info" id="flight-info-btn">Details</a></td>
+            <td>
+                <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST" id="deleteFlight">
+                    <button type="submit" form="deleteFlight" class="btn btn-danger"><i
+                            class="far fa-trash-alt"></i></button>
+                </form>
+            </td>
+        </tr>
+        <% } else { %>
+        <tr>
+            <td><%= flight.airline %></td>
+            <td><%= flight.flightNo %></td>
+            <td>
+                <%= flight.departs %>
+            </td>
+            <td><a href="/flights/<%= flight._id %>" class="btn btn-info" id="flight-info-btn">Details</a></td>
+            <td>
+                <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST" id="deleteFlight">
+                    <button type="submit" form="deleteFlight" class="btn btn-danger"><i
+                            class="far fa-trash-alt"></i></button>
+                </form>
+            </td>
+        </tr>
+        <% }}); %>
+    </tbody>
+</table>
+<div id="add-flight">
+    <a href="/flights/new" class="btn btn-primary btn-lg btn-block">Create New Flight</a>
+</div>
+<%- include('../partials/footer.ejs') %>
